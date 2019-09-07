@@ -11,13 +11,19 @@ jobs:
       - name: Build Docker Machine
         env:
           USE_CONTAINER: true
-        run: |
-          cd machine
-          make build
+        working-directory: machine
+        run: make build
       - name: Explore bin
-        run: |
-          cd machine
-          ls -al bin
+        working-directory: machine
+        run: ls -al bin
+      - uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{github.token}}
+          script: |
+            github.releases.create_release(GITHUB_REPOSITORY, null, {
+              target_commitish: GITHUB_SHA
+            })
+            github.issues.createComment({...context.issue, body: '👋 Thanks for reporting!'})
       # - name: Set up Go 1.13
       #   uses: actions/setup-go@v1
       #   with:
