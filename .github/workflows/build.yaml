@@ -7,17 +7,15 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout Docker Machine
-        run: |
-          echo current dir $(pwd)
-          echo GITHUB_WORKSPACE ${GITHUB_WORKSPACE}
-          git clone https://github.com/docker/machine.git
-          ls
+        run: git clone https://github.com/docker/machine.git
       - name: Build Docker Machine
         env:
           USE_CONTAINER: true
         run: |
           cd machine
           make build
+      - name: Explore bin
+        run: find bin
       # - name: Set up Go 1.13
       #   uses: actions/setup-go@v1
       #   with:
