@@ -15,7 +15,9 @@ jobs:
           cd machine
           make build
       - name: Explore bin
-        run: find bin
+        run: |
+          cd machine
+          ls -al bin
       # - name: Set up Go 1.13
       #   uses: actions/setup-go@v1
       #   with:
