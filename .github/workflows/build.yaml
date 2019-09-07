@@ -12,6 +12,12 @@ jobs:
           echo GITHUB_WORKSPACE ${GITHUB_WORKSPACE}
           git clone https://github.com/docker/machine.git
           ls
+      - name: Build Docker Machine
+        env:
+          USE_CONTAINER: true
+        run: |
+          cd machine
+          make build
       # - name: Set up Go 1.13
       #   uses: actions/setup-go@v1
       #   with:
